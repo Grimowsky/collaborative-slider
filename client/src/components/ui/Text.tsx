@@ -10,6 +10,7 @@ const variants = cva('', {
       'normal-14': 'text-md text-black',
       'normal-10': 'text-xs text-black',
       'bold-16': 'text-base text-black font-bold',
+      'bold-24': 'text-[24px] text-black font-bold',
     },
   },
   defaultVariants: {

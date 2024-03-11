@@ -14,7 +14,7 @@ export default {
         error: '#CE1244',
       },
       boxShadow: {
-        primary: '0 20px 80px -10px primary',
+        primary: '0 10px 30px -10px primary',
       },
       transform: {
         'button-hover': 'translateY(0, -3px)',
