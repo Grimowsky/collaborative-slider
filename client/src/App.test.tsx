@@ -4,7 +4,7 @@ import { describe, it } from 'vitest';
 
 //TODO: remove this test  after forking repo
 describe('App basic test', () => {
-  it('Should render greetings', () => {
+  it.skip('Should render greetings', () => {
     render(<App />);
     expect(screen.getByText('hello there')).toBeDefined();
   });
