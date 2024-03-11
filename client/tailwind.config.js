@@ -11,6 +11,7 @@ export default {
         primary: '#5f5da8',
         secondary: '#d2accd',
         accent: '#b77b9b',
+        error: '#CE1244',
       },
       boxShadow: {
         primary: '0 20px 80px -10px primary',

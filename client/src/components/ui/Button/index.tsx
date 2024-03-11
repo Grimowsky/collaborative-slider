@@ -19,8 +19,8 @@ export type Variants = VariantProps<typeof variants>;
 type ButtonNativeProps = React.ComponentProps<'button'>;
 type ButtonProps = ButtonNativeProps & Variants;
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
+const Button = React.forwardRef(
+  (props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
     const { className, variant, ...rest } = props;
 
     return (
