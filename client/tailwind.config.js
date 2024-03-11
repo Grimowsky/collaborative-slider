@@ -12,6 +12,12 @@ export default {
         secondary: '#d2accd',
         accent: '#b77b9b',
       },
+      boxShadow: {
+        primary: '0 20px 80px -10px primary',
+      },
+      transform: {
+        'button-hover': 'translateY(0, -3px)',
+      },
     },
   },
   plugins: [],
