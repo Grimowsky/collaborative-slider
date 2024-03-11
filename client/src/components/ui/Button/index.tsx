@@ -5,7 +5,7 @@ import { cn } from '../../../utils/className.utils';
 const variants = cva('py-2 px-8 text-base hover:-translate-y-0.5', {
   variants: {
     variant: {
-      primary: 'bg-primary text-background rounded-md hover:shadow-primary',
+      primary: 'bg-primary text-white rounded-md hover:shadow-primary',
       secondary: '',
     },
   },
