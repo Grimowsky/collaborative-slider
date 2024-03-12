@@ -15,6 +15,7 @@ export default {
       },
       boxShadow: {
         primary: '0 10px 30px -10px primary',
+        gray: '0 10px 30px -10px gray',
       },
       transform: {
         'button-hover': 'translateY(0, -3px)',

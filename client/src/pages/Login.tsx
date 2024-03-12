@@ -8,7 +8,9 @@ const Login = () => {
   return (
     <Box className={'w-full h-screen flex justify-center bg-white'}>
       <Box
-        className={'mt-32 h-[640px] w-[480px] rounded-xl border border-gray'}
+        className={
+          'mt-32 h-[640px] w-[480px] rounded-xl border border-gray shadow-gray'
+        }
       >
         <Box className={'py-8 px-8'}>
           <Text variant={'bold-24'}>Login to collaborate</Text>
