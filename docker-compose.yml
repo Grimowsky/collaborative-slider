@@ -49,6 +49,7 @@ services:
       target: dev
     volumes:
       - ./client/src:/app/src
+      - ./client/tailwind.config.js:/app/tailwind.config.js
     command: "npm run dev"
     ports:
       - "3000:3000"
