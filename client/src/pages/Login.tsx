@@ -3,40 +3,7 @@ import { Box, BoxFlexCol } from '../components/ui/Boxes';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { Text } from '../components/ui/Text';
-import { httpClient } from '../api';
-import { useRequest } from 'alova';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-const schema = yup.object().shape({
-  username: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
-});
-
-type LoginForm = yup.InferType<typeof schema>;
-
-const useLogin = () => {
-  const { handleSubmit, register } = useForm<LoginForm>({
-    resolver: yupResolver(schema),
-  });
-  const { send: login } = useRequest(
-    (data: LoginForm) => httpClient.Post('auth/login', data),
-    {
-      immediate: false,
-    },
-  );
-
-  const handleLogin: SubmitHandler<LoginForm> = async (data) => {
-    try {
-      await login(data);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  return { handleSubmit, register, handleLogin };
-};
+import useLogin from '../hooks/useLogin';
 
 const Login = () => {
   const { handleSubmit, register, handleLogin } = useLogin();
