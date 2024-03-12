@@ -11,6 +11,7 @@ const variants = cva('', {
       'normal-10': 'text-xs text-black',
       'bold-16': 'text-base text-black font-bold',
       'bold-24': 'text-[24px] text-black font-bold',
+      'bold-18': 'text-[18px] text-black font-bold',
     },
   },
   defaultVariants: {
