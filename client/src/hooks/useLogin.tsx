@@ -13,7 +13,7 @@ const schema = yup.object().shape({
 type LoginForm = yup.InferType<typeof schema>;
 type AuthResponse = { token: string; refreshToken: string };
 
-const AuthKeyMappings = {
+const AUTH_KEY_MAPPINGS = {
   AUTH_TOKEN: 'AUTH_TOKEN',
   REFRESH_TOKEN: 'REFRESH_TOKEN',
 };
@@ -31,8 +31,8 @@ const useLogin = () => {
   const handleLogin: SubmitHandler<LoginForm> = async (data) => {
     try {
       const res = await login(data);
-      Cookies.set(AuthKeyMappings.AUTH_TOKEN, res.token);
-      Cookies.set(AuthKeyMappings.REFRESH_TOKEN, res.refreshToken);
+      Cookies.set(AUTH_KEY_MAPPINGS.AUTH_TOKEN, res.token);
+      Cookies.set(AUTH_KEY_MAPPINGS.REFRESH_TOKEN, res.refreshToken);
     } catch (e) {
       console.error(e);
     }
