@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useRequest } from 'alova';
 import { httpClient } from '../api';
 import Cookies from 'js-cookie';
+import { AUTH_KEY_MAPPINGS } from '../utils/keyMappings';
 
 const schema = yup.object().shape({
   username: yup.string().required('Username is required'),
@@ -13,10 +14,6 @@ const schema = yup.object().shape({
 type LoginForm = yup.InferType<typeof schema>;
 type AuthResponse = { token: string; refreshToken: string };
 
-const AUTH_KEY_MAPPINGS = {
-  AUTH_TOKEN: 'AUTH_TOKEN',
-  REFRESH_TOKEN: 'REFRESH_TOKEN',
-};
 const useLogin = () => {
   const { handleSubmit, register } = useForm<LoginForm>({
     resolver: yupResolver(schema),
