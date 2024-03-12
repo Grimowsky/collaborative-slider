@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "monorepo with react and nodeJS",
   "main": "index.js",
-  "workspaces": ["server/", "client/"],
+  "workspaces": [
+    "server/",
+    "client/"
+  ],
   "scripts": {
     "test": "npm test --workspace=client && npm test --workspace=server",
     "test:coverage": "npm test --workspace=client -- --coverage && npm test --workspace=server -- --coverage",
@@ -29,5 +32,10 @@
   "bugs": {
     "url": "https://github.com/Grimowsky/react-node-ts-monorepo/issues"
   },
-  "homepage": "https://github.com/Grimowsky/react-node-ts-monorepo#readme"
+  "homepage": "https://github.com/Grimowsky/react-node-ts-monorepo#readme",
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "alova": "^2.17.1",
+    "yup": "^1.4.0"
+  }
 }
