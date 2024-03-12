@@ -23,6 +23,11 @@ export type user = $Result.DefaultSelection<Prisma.$userPayload>
  * 
  */
 export type role = $Result.DefaultSelection<Prisma.$rolePayload>
+/**
+ * Model slider
+ * 
+ */
+export type slider = $Result.DefaultSelection<Prisma.$sliderPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -165,6 +170,16 @@ export class PrismaClient<
     * ```
     */
   get role(): Prisma.roleDelegate<ExtArgs>;
+
+  /**
+   * `prisma.slider`: Exposes CRUD operations for the **slider** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sliders
+    * const sliders = await prisma.slider.findMany()
+    * ```
+    */
+  get slider(): Prisma.sliderDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -636,7 +651,8 @@ export namespace Prisma {
 
   export const ModelName: {
     user: 'user',
-    role: 'role'
+    role: 'role',
+    slider: 'slider'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -653,7 +669,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'role'
+      modelProps: 'user' | 'role' | 'slider'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -786,6 +802,72 @@ export namespace Prisma {
           count: {
             args: Prisma.roleCountArgs<ExtArgs>,
             result: $Utils.Optional<RoleCountAggregateOutputType> | number
+          }
+        }
+      }
+      slider: {
+        payload: Prisma.$sliderPayload<ExtArgs>
+        fields: Prisma.sliderFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.sliderFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.sliderFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload>
+          }
+          findFirst: {
+            args: Prisma.sliderFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.sliderFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload>
+          }
+          findMany: {
+            args: Prisma.sliderFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload>[]
+          }
+          create: {
+            args: Prisma.sliderCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload>
+          }
+          createMany: {
+            args: Prisma.sliderCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.sliderDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload>
+          }
+          update: {
+            args: Prisma.sliderUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload>
+          }
+          deleteMany: {
+            args: Prisma.sliderDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.sliderUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.sliderUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$sliderPayload>
+          }
+          aggregate: {
+            args: Prisma.SliderAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSlider>
+          }
+          groupBy: {
+            args: Prisma.sliderGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<SliderGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.sliderCountArgs<ExtArgs>,
+            result: $Utils.Optional<SliderCountAggregateOutputType> | number
           }
         }
       }
@@ -2870,6 +2952,918 @@ export namespace Prisma {
 
 
   /**
+   * Model slider
+   */
+
+  export type AggregateSlider = {
+    _count: SliderCountAggregateOutputType | null
+    _avg: SliderAvgAggregateOutputType | null
+    _sum: SliderSumAggregateOutputType | null
+    _min: SliderMinAggregateOutputType | null
+    _max: SliderMaxAggregateOutputType | null
+  }
+
+  export type SliderAvgAggregateOutputType = {
+    id: number | null
+    lastEditorId: number | null
+    value: number | null
+  }
+
+  export type SliderSumAggregateOutputType = {
+    id: number | null
+    lastEditorId: number | null
+    value: number | null
+  }
+
+  export type SliderMinAggregateOutputType = {
+    id: number | null
+    lastEdited: Date | null
+    lastEditorName: string | null
+    lastEditorId: number | null
+    value: number | null
+  }
+
+  export type SliderMaxAggregateOutputType = {
+    id: number | null
+    lastEdited: Date | null
+    lastEditorName: string | null
+    lastEditorId: number | null
+    value: number | null
+  }
+
+  export type SliderCountAggregateOutputType = {
+    id: number
+    lastEdited: number
+    lastEditorName: number
+    lastEditorId: number
+    value: number
+    _all: number
+  }
+
+
+  export type SliderAvgAggregateInputType = {
+    id?: true
+    lastEditorId?: true
+    value?: true
+  }
+
+  export type SliderSumAggregateInputType = {
+    id?: true
+    lastEditorId?: true
+    value?: true
+  }
+
+  export type SliderMinAggregateInputType = {
+    id?: true
+    lastEdited?: true
+    lastEditorName?: true
+    lastEditorId?: true
+    value?: true
+  }
+
+  export type SliderMaxAggregateInputType = {
+    id?: true
+    lastEdited?: true
+    lastEditorName?: true
+    lastEditorId?: true
+    value?: true
+  }
+
+  export type SliderCountAggregateInputType = {
+    id?: true
+    lastEdited?: true
+    lastEditorName?: true
+    lastEditorId?: true
+    value?: true
+    _all?: true
+  }
+
+  export type SliderAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which slider to aggregate.
+     */
+    where?: sliderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sliders to fetch.
+     */
+    orderBy?: sliderOrderByWithRelationInput | sliderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: sliderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sliders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sliders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned sliders
+    **/
+    _count?: true | SliderCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SliderAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SliderSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SliderMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SliderMaxAggregateInputType
+  }
+
+  export type GetSliderAggregateType<T extends SliderAggregateArgs> = {
+        [P in keyof T & keyof AggregateSlider]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSlider[P]>
+      : GetScalarType<T[P], AggregateSlider[P]>
+  }
+
+
+
+
+  export type sliderGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: sliderWhereInput
+    orderBy?: sliderOrderByWithAggregationInput | sliderOrderByWithAggregationInput[]
+    by: SliderScalarFieldEnum[] | SliderScalarFieldEnum
+    having?: sliderScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SliderCountAggregateInputType | true
+    _avg?: SliderAvgAggregateInputType
+    _sum?: SliderSumAggregateInputType
+    _min?: SliderMinAggregateInputType
+    _max?: SliderMaxAggregateInputType
+  }
+
+  export type SliderGroupByOutputType = {
+    id: number
+    lastEdited: Date
+    lastEditorName: string | null
+    lastEditorId: number
+    value: number
+    _count: SliderCountAggregateOutputType | null
+    _avg: SliderAvgAggregateOutputType | null
+    _sum: SliderSumAggregateOutputType | null
+    _min: SliderMinAggregateOutputType | null
+    _max: SliderMaxAggregateOutputType | null
+  }
+
+  type GetSliderGroupByPayload<T extends sliderGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SliderGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SliderGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SliderGroupByOutputType[P]>
+            : GetScalarType<T[P], SliderGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type sliderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    lastEdited?: boolean
+    lastEditorName?: boolean
+    lastEditorId?: boolean
+    value?: boolean
+  }, ExtArgs["result"]["slider"]>
+
+  export type sliderSelectScalar = {
+    id?: boolean
+    lastEdited?: boolean
+    lastEditorName?: boolean
+    lastEditorId?: boolean
+    value?: boolean
+  }
+
+
+  export type $sliderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "slider"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      lastEdited: Date
+      lastEditorName: string | null
+      lastEditorId: number
+      value: number
+    }, ExtArgs["result"]["slider"]>
+    composites: {}
+  }
+
+
+  type sliderGetPayload<S extends boolean | null | undefined | sliderDefaultArgs> = $Result.GetResult<Prisma.$sliderPayload, S>
+
+  type sliderCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<sliderFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SliderCountAggregateInputType | true
+    }
+
+  export interface sliderDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['slider'], meta: { name: 'slider' } }
+    /**
+     * Find zero or one Slider that matches the filter.
+     * @param {sliderFindUniqueArgs} args - Arguments to find a Slider
+     * @example
+     * // Get one Slider
+     * const slider = await prisma.slider.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends sliderFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, sliderFindUniqueArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Slider that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {sliderFindUniqueOrThrowArgs} args - Arguments to find a Slider
+     * @example
+     * // Get one Slider
+     * const slider = await prisma.slider.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends sliderFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, sliderFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Slider that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sliderFindFirstArgs} args - Arguments to find a Slider
+     * @example
+     * // Get one Slider
+     * const slider = await prisma.slider.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends sliderFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, sliderFindFirstArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Slider that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sliderFindFirstOrThrowArgs} args - Arguments to find a Slider
+     * @example
+     * // Get one Slider
+     * const slider = await prisma.slider.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends sliderFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, sliderFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Sliders that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sliderFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sliders
+     * const sliders = await prisma.slider.findMany()
+     * 
+     * // Get first 10 Sliders
+     * const sliders = await prisma.slider.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sliderWithIdOnly = await prisma.slider.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends sliderFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sliderFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Slider.
+     * @param {sliderCreateArgs} args - Arguments to create a Slider.
+     * @example
+     * // Create one Slider
+     * const Slider = await prisma.slider.create({
+     *   data: {
+     *     // ... data to create a Slider
+     *   }
+     * })
+     * 
+    **/
+    create<T extends sliderCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, sliderCreateArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Sliders.
+     *     @param {sliderCreateManyArgs} args - Arguments to create many Sliders.
+     *     @example
+     *     // Create many Sliders
+     *     const slider = await prisma.slider.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends sliderCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sliderCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Slider.
+     * @param {sliderDeleteArgs} args - Arguments to delete one Slider.
+     * @example
+     * // Delete one Slider
+     * const Slider = await prisma.slider.delete({
+     *   where: {
+     *     // ... filter to delete one Slider
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends sliderDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, sliderDeleteArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Slider.
+     * @param {sliderUpdateArgs} args - Arguments to update one Slider.
+     * @example
+     * // Update one Slider
+     * const slider = await prisma.slider.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends sliderUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, sliderUpdateArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Sliders.
+     * @param {sliderDeleteManyArgs} args - Arguments to filter Sliders to delete.
+     * @example
+     * // Delete a few Sliders
+     * const { count } = await prisma.slider.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends sliderDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, sliderDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sliders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sliderUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sliders
+     * const slider = await prisma.slider.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends sliderUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, sliderUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Slider.
+     * @param {sliderUpsertArgs} args - Arguments to update or create a Slider.
+     * @example
+     * // Update or create a Slider
+     * const slider = await prisma.slider.upsert({
+     *   create: {
+     *     // ... data to create a Slider
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Slider we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends sliderUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, sliderUpsertArgs<ExtArgs>>
+    ): Prisma__sliderClient<$Result.GetResult<Prisma.$sliderPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Sliders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sliderCountArgs} args - Arguments to filter Sliders to count.
+     * @example
+     * // Count the number of Sliders
+     * const count = await prisma.slider.count({
+     *   where: {
+     *     // ... the filter for the Sliders we want to count
+     *   }
+     * })
+    **/
+    count<T extends sliderCountArgs>(
+      args?: Subset<T, sliderCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SliderCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Slider.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SliderAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SliderAggregateArgs>(args: Subset<T, SliderAggregateArgs>): Prisma.PrismaPromise<GetSliderAggregateType<T>>
+
+    /**
+     * Group by Slider.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {sliderGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends sliderGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: sliderGroupByArgs['orderBy'] }
+        : { orderBy?: sliderGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, sliderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSliderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the slider model
+   */
+  readonly fields: sliderFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for slider.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__sliderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the slider model
+   */ 
+  interface sliderFieldRefs {
+    readonly id: FieldRef<"slider", 'Int'>
+    readonly lastEdited: FieldRef<"slider", 'DateTime'>
+    readonly lastEditorName: FieldRef<"slider", 'String'>
+    readonly lastEditorId: FieldRef<"slider", 'Int'>
+    readonly value: FieldRef<"slider", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * slider findUnique
+   */
+  export type sliderFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * Filter, which slider to fetch.
+     */
+    where: sliderWhereUniqueInput
+  }
+
+
+  /**
+   * slider findUniqueOrThrow
+   */
+  export type sliderFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * Filter, which slider to fetch.
+     */
+    where: sliderWhereUniqueInput
+  }
+
+
+  /**
+   * slider findFirst
+   */
+  export type sliderFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * Filter, which slider to fetch.
+     */
+    where?: sliderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sliders to fetch.
+     */
+    orderBy?: sliderOrderByWithRelationInput | sliderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sliders.
+     */
+    cursor?: sliderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sliders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sliders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sliders.
+     */
+    distinct?: SliderScalarFieldEnum | SliderScalarFieldEnum[]
+  }
+
+
+  /**
+   * slider findFirstOrThrow
+   */
+  export type sliderFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * Filter, which slider to fetch.
+     */
+    where?: sliderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sliders to fetch.
+     */
+    orderBy?: sliderOrderByWithRelationInput | sliderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for sliders.
+     */
+    cursor?: sliderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sliders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sliders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of sliders.
+     */
+    distinct?: SliderScalarFieldEnum | SliderScalarFieldEnum[]
+  }
+
+
+  /**
+   * slider findMany
+   */
+  export type sliderFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * Filter, which sliders to fetch.
+     */
+    where?: sliderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of sliders to fetch.
+     */
+    orderBy?: sliderOrderByWithRelationInput | sliderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing sliders.
+     */
+    cursor?: sliderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` sliders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` sliders.
+     */
+    skip?: number
+    distinct?: SliderScalarFieldEnum | SliderScalarFieldEnum[]
+  }
+
+
+  /**
+   * slider create
+   */
+  export type sliderCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * The data needed to create a slider.
+     */
+    data: XOR<sliderCreateInput, sliderUncheckedCreateInput>
+  }
+
+
+  /**
+   * slider createMany
+   */
+  export type sliderCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many sliders.
+     */
+    data: sliderCreateManyInput | sliderCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * slider update
+   */
+  export type sliderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * The data needed to update a slider.
+     */
+    data: XOR<sliderUpdateInput, sliderUncheckedUpdateInput>
+    /**
+     * Choose, which slider to update.
+     */
+    where: sliderWhereUniqueInput
+  }
+
+
+  /**
+   * slider updateMany
+   */
+  export type sliderUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update sliders.
+     */
+    data: XOR<sliderUpdateManyMutationInput, sliderUncheckedUpdateManyInput>
+    /**
+     * Filter which sliders to update
+     */
+    where?: sliderWhereInput
+  }
+
+
+  /**
+   * slider upsert
+   */
+  export type sliderUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * The filter to search for the slider to update in case it exists.
+     */
+    where: sliderWhereUniqueInput
+    /**
+     * In case the slider found by the `where` argument doesn't exist, create a new slider with this data.
+     */
+    create: XOR<sliderCreateInput, sliderUncheckedCreateInput>
+    /**
+     * In case the slider was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<sliderUpdateInput, sliderUncheckedUpdateInput>
+  }
+
+
+  /**
+   * slider delete
+   */
+  export type sliderDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+    /**
+     * Filter which slider to delete.
+     */
+    where: sliderWhereUniqueInput
+  }
+
+
+  /**
+   * slider deleteMany
+   */
+  export type sliderDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which sliders to delete
+     */
+    where?: sliderWhereInput
+  }
+
+
+  /**
+   * slider without action
+   */
+  export type sliderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the slider
+     */
+    select?: sliderSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -2902,6 +3896,17 @@ export namespace Prisma {
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
+  export const SliderScalarFieldEnum: {
+    id: 'id',
+    lastEdited: 'lastEdited',
+    lastEditorName: 'lastEditorName',
+    lastEditorId: 'lastEditorId',
+    value: 'value'
+  };
+
+  export type SliderScalarFieldEnum = (typeof SliderScalarFieldEnum)[keyof typeof SliderScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -2916,6 +3921,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -2948,6 +3961,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -3067,6 +4094,60 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"role"> | string
   }
 
+  export type sliderWhereInput = {
+    AND?: sliderWhereInput | sliderWhereInput[]
+    OR?: sliderWhereInput[]
+    NOT?: sliderWhereInput | sliderWhereInput[]
+    id?: IntFilter<"slider"> | number
+    lastEdited?: DateTimeFilter<"slider"> | Date | string
+    lastEditorName?: StringNullableFilter<"slider"> | string | null
+    lastEditorId?: IntFilter<"slider"> | number
+    value?: IntFilter<"slider"> | number
+  }
+
+  export type sliderOrderByWithRelationInput = {
+    id?: SortOrder
+    lastEdited?: SortOrder
+    lastEditorName?: SortOrderInput | SortOrder
+    lastEditorId?: SortOrder
+    value?: SortOrder
+  }
+
+  export type sliderWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: sliderWhereInput | sliderWhereInput[]
+    OR?: sliderWhereInput[]
+    NOT?: sliderWhereInput | sliderWhereInput[]
+    lastEdited?: DateTimeFilter<"slider"> | Date | string
+    lastEditorName?: StringNullableFilter<"slider"> | string | null
+    lastEditorId?: IntFilter<"slider"> | number
+    value?: IntFilter<"slider"> | number
+  }, "id">
+
+  export type sliderOrderByWithAggregationInput = {
+    id?: SortOrder
+    lastEdited?: SortOrder
+    lastEditorName?: SortOrderInput | SortOrder
+    lastEditorId?: SortOrder
+    value?: SortOrder
+    _count?: sliderCountOrderByAggregateInput
+    _avg?: sliderAvgOrderByAggregateInput
+    _max?: sliderMaxOrderByAggregateInput
+    _min?: sliderMinOrderByAggregateInput
+    _sum?: sliderSumOrderByAggregateInput
+  }
+
+  export type sliderScalarWhereWithAggregatesInput = {
+    AND?: sliderScalarWhereWithAggregatesInput | sliderScalarWhereWithAggregatesInput[]
+    OR?: sliderScalarWhereWithAggregatesInput[]
+    NOT?: sliderScalarWhereWithAggregatesInput | sliderScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"slider"> | number
+    lastEdited?: DateTimeWithAggregatesFilter<"slider"> | Date | string
+    lastEditorName?: StringNullableWithAggregatesFilter<"slider"> | string | null
+    lastEditorId?: IntWithAggregatesFilter<"slider"> | number
+    value?: IntWithAggregatesFilter<"slider"> | number
+  }
+
   export type userCreateInput = {
     email: string
     username: string
@@ -3153,6 +4234,59 @@ export namespace Prisma {
   export type roleUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type sliderCreateInput = {
+    lastEdited: Date | string
+    lastEditorName?: string | null
+    lastEditorId: number
+    value: number
+  }
+
+  export type sliderUncheckedCreateInput = {
+    id?: number
+    lastEdited: Date | string
+    lastEditorName?: string | null
+    lastEditorId: number
+    value: number
+  }
+
+  export type sliderUpdateInput = {
+    lastEdited?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastEditorName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastEditorId?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type sliderUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    lastEdited?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastEditorName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastEditorId?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type sliderCreateManyInput = {
+    id?: number
+    lastEdited: Date | string
+    lastEditorName?: string | null
+    lastEditorId: number
+    value: number
+  }
+
+  export type sliderUpdateManyMutationInput = {
+    lastEdited?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastEditorName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastEditorId?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type sliderUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    lastEdited?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastEditorName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastEditorId?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3287,6 +4421,105 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type sliderCountOrderByAggregateInput = {
+    id?: SortOrder
+    lastEdited?: SortOrder
+    lastEditorName?: SortOrder
+    lastEditorId?: SortOrder
+    value?: SortOrder
+  }
+
+  export type sliderAvgOrderByAggregateInput = {
+    id?: SortOrder
+    lastEditorId?: SortOrder
+    value?: SortOrder
+  }
+
+  export type sliderMaxOrderByAggregateInput = {
+    id?: SortOrder
+    lastEdited?: SortOrder
+    lastEditorName?: SortOrder
+    lastEditorId?: SortOrder
+    value?: SortOrder
+  }
+
+  export type sliderMinOrderByAggregateInput = {
+    id?: SortOrder
+    lastEdited?: SortOrder
+    lastEditorName?: SortOrder
+    lastEditorId?: SortOrder
+    value?: SortOrder
+  }
+
+  export type sliderSumOrderByAggregateInput = {
+    id?: SortOrder
+    lastEditorId?: SortOrder
+    value?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type roleCreateNestedOneWithoutUsersInput = {
     create?: XOR<roleCreateWithoutUsersInput, roleUncheckedCreateWithoutUsersInput>
     connectOrCreate?: roleCreateOrConnectWithoutUsersInput
@@ -3353,6 +4586,14 @@ export namespace Prisma {
     update?: userUpdateWithWhereUniqueWithoutRoleInput | userUpdateWithWhereUniqueWithoutRoleInput[]
     updateMany?: userUpdateManyWithWhereWithoutRoleInput | userUpdateManyWithWhereWithoutRoleInput[]
     deleteMany?: userScalarWhereInput | userScalarWhereInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -3422,6 +4663,73 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type roleCreateWithoutUsersInput = {
@@ -3552,6 +4860,10 @@ export namespace Prisma {
      * @deprecated Use roleDefaultArgs instead
      */
     export type roleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = roleDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use sliderDefaultArgs instead
+     */
+    export type sliderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = sliderDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

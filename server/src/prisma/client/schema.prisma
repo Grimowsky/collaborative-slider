@@ -1,9 +1,9 @@
 // This is your Prisma schema file,
-  // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
-  output = "../src/prisma/client"
+  output   = "../src/prisma/client"
 }
 
 datasource db {
@@ -12,16 +12,24 @@ datasource db {
 }
 
 model user {
-  id Int @id @default(autoincrement())
-  email String @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
   username String @unique
   password String
-  roleId Int
-  role role @relation(fields: [roleId], references: [id])
+  roleId   Int
+  role     role   @relation(fields: [roleId], references: [id])
 }
 
 model role {
-  id Int @id @default(autoincrement())
-  name String @unique
+  id    Int    @id @default(autoincrement())
+  name  String @unique
   users user[]
+}
+
+model slider {
+  id             Int      @id @default(autoincrement())
+  lastEdited     DateTime
+  lastEditorName String?
+  lastEditorId   Int
+  value          Int
 }

@@ -120,6 +120,14 @@ exports.Prisma.RoleScalarFieldEnum = {
   name: 'name'
 };
 
+exports.Prisma.SliderScalarFieldEnum = {
+  id: 'id',
+  lastEdited: 'lastEdited',
+  lastEditorName: 'lastEditorName',
+  lastEditorId: 'lastEditorId',
+  value: 'value'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -130,10 +138,16 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   user: 'user',
-  role: 'role'
+  role: 'role',
+  slider: 'slider'
 };
 
 /**
