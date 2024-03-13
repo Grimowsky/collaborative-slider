@@ -7,6 +7,7 @@ import {ExtendedError} from "../../utils/error/error";
 import { StatusCodes } from "http-status-codes";
 
 const update = async (req: AppReq): Promise<void> => {
+    let previousSliderValue
     const data: UpdateReq = req.body
     const userIdentity = req.headers.authorization as string
     const userInfo = jwtMiddleware.decodeUserFromToken(userIdentity.split(' ')[1])
@@ -23,13 +24,36 @@ const update = async (req: AppReq): Promise<void> => {
         throw ExtendedError.of('User not found', StatusCodes.NOT_FOUND)
     }
 
-    await prisma.slider.create({
+    try {
+        previousSliderValue =  await prisma.slider.findFirstOrThrow({select: {value: true}})
+    } catch (e) {
+        logger.error('Slider.service: Slider previous value not found');
+        throw ExtendedError.of('Slider previous value not found', StatusCodes.NOT_FOUND)
+    }
+
+    await prisma.slider.update({
+        where: {
+            id: 1
+        },
         data: {
-            lastEdited: new Date(),
-            lastEditorName: user?.username,
-            value: data.value,
-            lastEditorId: user?.id
+            value: data.value
         }
+    })
+
+    await prisma.slider_history.create({
+        data: {
+            editDate: new Date(),
+            prevValue: previousSliderValue.value,
+            editorId: user.id,
+            nextValue: data.value,
+            editorName: user.username,
+            slider: {
+                connect: {
+                    id: 1
+                }
+            }
+        }
+
     })
 
 }

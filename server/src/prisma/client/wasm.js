@@ -122,10 +122,17 @@ exports.Prisma.RoleScalarFieldEnum = {
 
 exports.Prisma.SliderScalarFieldEnum = {
   id: 'id',
-  lastEdited: 'lastEdited',
-  lastEditorName: 'lastEditorName',
-  lastEditorId: 'lastEditorId',
   value: 'value'
+};
+
+exports.Prisma.Slider_historyScalarFieldEnum = {
+  id: 'id',
+  editDate: 'editDate',
+  editorName: 'editorName',
+  editorId: 'editorId',
+  nextValue: 'nextValue',
+  prevValue: 'prevValue',
+  sliderId: 'sliderId'
 };
 
 exports.Prisma.SortOrder = {
@@ -147,7 +154,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   user: 'user',
   role: 'role',
-  slider: 'slider'
+  slider: 'slider',
+  slider_history: 'slider_history'
 };
 
 /**

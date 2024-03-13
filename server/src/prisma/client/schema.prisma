@@ -27,9 +27,18 @@ model role {
 }
 
 model slider {
-  id             Int      @id @default(autoincrement())
-  lastEdited     DateTime
-  lastEditorName String?
-  lastEditorId   Int
-  value          Int
+  id             Int              @id @default(autoincrement())
+  value          Int              @default(0)
+  slider_history slider_history[]
+}
+
+model slider_history {
+  id         Int      @id @default(autoincrement())
+  editDate   DateTime
+  editorName String?
+  editorId   Int
+  nextValue  Int
+  prevValue  Int
+  sliderId   Int
+  slider     slider   @relation(fields: [sliderId], references: [id])
 }
