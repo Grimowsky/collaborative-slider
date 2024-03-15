@@ -56,7 +56,7 @@ const authenticateToken = async (
     } catch (error) {
         const jwtError = error as JWT.VerifyErrors;
         return res
-            .status(StatusCodes.FORBIDDEN)
+            .status(StatusCodes.UNAUTHORIZED)
             .send({ message: jwtError?.message || 'Forbidden' });
     }
 };

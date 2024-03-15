@@ -4,11 +4,13 @@ import * as SliderController from '../Controllers/Slider.controller'
 import roleMiddleware from "../../../../middleware/roleMiddleware";
 import validateRequest from "../../../../middleware/validateRequest";
 import SliderSchemas from "../../../../validators/Slider.validators";
+import jwtMiddleware from "../../../../middleware/jwtMiddleware";
 const createRouter = (): express.Router => {
     const router = express.Router();
     router.post(
         '/',
         asyncWrapper(validateRequest(SliderSchemas.UpdateSliderSchema)),
+        jwtMiddleware.verifyAuthToken,
         roleMiddleware(['user']),
         asyncWrapper(
             SliderController.updateSlider
