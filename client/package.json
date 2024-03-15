@@ -84,6 +84,9 @@
       "eslint-config-grimowsky",
       "plugin:storybook/recommended"
     ],
-    "root": true
+    "root": true,
+    "rules": {
+      "react-refresh/only-export-components": "warn"
+    }
   }
 }
