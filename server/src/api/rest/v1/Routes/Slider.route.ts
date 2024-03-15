@@ -9,8 +9,8 @@ const createRouter = (): express.Router => {
     const router = express.Router();
     router.post(
         '/',
-        asyncWrapper(validateRequest(SliderSchemas.UpdateSliderSchema)),
         jwtMiddleware.verifyAuthToken,
+        asyncWrapper(validateRequest(SliderSchemas.UpdateSliderSchema)),
         roleMiddleware(['user']),
         asyncWrapper(
             SliderController.updateSlider
