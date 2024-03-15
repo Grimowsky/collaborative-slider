@@ -1,9 +1,11 @@
 import * as React from 'react';
+import Cookies from 'js-cookie';
+import { AUTH_KEY_MAPPINGS } from '../utils/keyMappings';
+import { SetState } from '../types/common';
 
 type AuthContextType = {
-  isAuthenticated: boolean;
-  logout: () => void;
-  login: () => void;
+  loggedIn: boolean;
+  setLoggedIn: SetState<boolean>;
 };
 
 export const AuthContext = React.createContext({} as AuthContextType);
@@ -11,18 +13,18 @@ export const AuthContext = React.createContext({} as AuthContextType);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
-  const login = () => {
-    setIsAuthenticated(true);
-  };
-
-  const logout = () => {
-    setIsAuthenticated(false);
-  };
+  React.useLayoutEffect(() => {
+    if (Cookies.get(AUTH_KEY_MAPPINGS.AUTH_TOKEN)) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, logout, login }}>
+    <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );

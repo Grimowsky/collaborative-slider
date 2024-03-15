@@ -39,9 +39,14 @@ export const authHttpClient = createAlova({
         }
         tokenRefreshing = true;
         const res = await refreshTokenMethod({ refreshToken: refreshToken });
-        Cookies.set(AUTH_KEY_MAPPINGS.AUTH_TOKEN, res.token);
-        Cookies.set(AUTH_KEY_MAPPINGS.REFRESH_TOKEN, res.refreshToken);
-        tokenRefreshing = false;
+        if (res?.token && res?.refreshToken) {
+          Cookies.set(AUTH_KEY_MAPPINGS.AUTH_TOKEN, res.token);
+          Cookies.set(AUTH_KEY_MAPPINGS.REFRESH_TOKEN, res.refreshToken);
+        } else {
+          Cookies.remove(AUTH_KEY_MAPPINGS.AUTH_TOKEN);
+          Cookies.remove(AUTH_KEY_MAPPINGS.REFRESH_TOKEN);
+          window.location.replace('/');
+        }
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         waitingList.forEach((resolve) => resolve());
@@ -55,7 +60,7 @@ export const authHttpClient = createAlova({
         method.config.transformData = methodTransformData;
         return dataResent;
       } catch (e) {
-        console.error(e);
+        console.error('error', e);
       }
     }
   },

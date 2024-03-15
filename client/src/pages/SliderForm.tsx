@@ -40,6 +40,7 @@ const useSliderForm = () => {
 
 const SliderForm = () => {
   const { handleSubmit, handleSliderSubmit, setValue } = useSliderForm();
+
   return (
     <form onSubmit={handleSubmit(handleSliderSubmit)}>
       <Box className={'w-full h-screen'}>

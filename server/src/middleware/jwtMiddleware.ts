@@ -24,11 +24,11 @@ interface DecodedTokenData {
     exp: number;
 }
 const createToken = (data: TokenData): string => {
-    return JWT.sign({ data }, SECRET, { expiresIn: '1h' });
+    return JWT.sign({ data }, SECRET, { expiresIn: '10m' });
 };
 
 const createRefreshToken = (data: TokenData): string => {
-    return JWT.sign({ data }, SECRET, { expiresIn: '2h' });
+    return JWT.sign({ data }, SECRET, { expiresIn: '30m' });
 };
 
 const verifyAccessToken = (token: string): JwtPayload | string => {
