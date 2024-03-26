@@ -18,7 +18,7 @@ type AuthResponse = { token: string; refreshToken: string };
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const { login: setLogin } = useAuth();
+  const { setLoggedIn: setLogin } = useAuth();
   const { handleSubmit, register } = useForm<LoginForm>({
     resolver: yupResolver(schema),
   });
@@ -34,7 +34,7 @@ const useLogin = () => {
       const res = await login(data);
       Cookies.set(AUTH_KEY_MAPPINGS.AUTH_TOKEN, res.token);
       Cookies.set(AUTH_KEY_MAPPINGS.REFRESH_TOKEN, res.refreshToken);
-      setLogin();
+      setLogin(true);
       navigate('/slider');
     } catch (e) {
       console.error(e);

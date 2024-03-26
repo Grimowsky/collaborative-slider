@@ -84,7 +84,7 @@ describe('jwtMiddleware', () => {
         expect(response).toBeUndefined();
         expect(next).toHaveBeenCalled();
     });
-    it('should throw forbidden error if token expired or is invalid', async () => {
+    it('should throw unauthorized error if token expired or is invalid', async () => {
         jest.useFakeTimers({
             now: new Date().getTime() + ONE_HOUR_DATE_OFFSET,
         });
@@ -99,7 +99,7 @@ describe('jwtMiddleware', () => {
 
         await jwtMiddleware.verifyAuthToken(req, res, next);
 
-        expect(res?.statusCode).toBe(403);
+        expect(res?.statusCode).toBe(401);
         expect(res._getData()).toStrictEqual({
             message: 'jwt expired',
         });

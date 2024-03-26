@@ -1,6 +1,14 @@
 import prisma from '../src/prismaClient';
 import * as bcrypt from 'bcrypt';
 
+const initSlider = async (): Promise<void> => {
+    await prisma.slider.create({
+        data: {
+            value: 0,
+        },
+    })
+}
+
 const createRoles = async (): Promise<void> => {
     await prisma.role.createMany({
         data: [
@@ -42,6 +50,7 @@ const createUsers = async (): Promise<void> => {
 
 const main = async (): Promise<void> => {
     try {
+        await initSlider();
         await createRoles();
         await createUsers();
     } catch (e) {

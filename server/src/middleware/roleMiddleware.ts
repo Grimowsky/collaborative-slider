@@ -18,7 +18,7 @@ const roleMiddleware = (allowedRoles: Role[]) => {
         }
         const token = header.split(' ')[1];
         const role = jwtMiddleware.decodeUserFromToken(token)?.data?.role;
-
+        
         if (allowedRoles.includes(role)) {
             next();
         } else {

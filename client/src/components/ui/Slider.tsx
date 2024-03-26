@@ -2,22 +2,24 @@ import * as React from 'react';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import { cn } from '../../utils/className.utils';
 
+const Slider = SliderPrimitive.Slider;
+
 type SliderRoot = typeof SliderPrimitive.Root;
-const Root = React.forwardRef<
-  React.ElementRef<SliderRoot>,
-  React.ComponentPropsWithoutRef<SliderRoot>
->((props, forwardedRef) => {
-  return (
-    <SliderPrimitive.Root
-      {...props}
-      ref={forwardedRef}
-      className={cn(
-        'relative flex items-center select-none w-full min-w-24 h-5',
-        props.className,
-      )}
-    />
-  );
-});
+type SliderRootProps = React.ComponentPropsWithoutRef<SliderRoot>;
+const Root = React.forwardRef<React.ElementRef<SliderRoot>, SliderRootProps>(
+  (props, forwardedRef) => {
+    return (
+      <SliderPrimitive.Root
+        {...props}
+        ref={forwardedRef}
+        className={cn(
+          'relative flex items-center select-none w-full min-w-24 h-5',
+          props.className,
+        )}
+      />
+    );
+  },
+);
 Root.displayName = 'SliderRoot';
 
 type SliderTrack = typeof SliderPrimitive.Track;
@@ -65,4 +67,4 @@ const Thumb = React.forwardRef<
   );
 });
 
-export { Root, Track, Range, Thumb };
+export { Slider, Root, Track, Range, Thumb };
